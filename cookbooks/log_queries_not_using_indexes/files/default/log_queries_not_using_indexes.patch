@@ -1,0 +1,10 @@
+--- /etc/mysql/my.cnf	2009-11-19 15:12:36.000000000 -0800
++++ /etc/mysql/my.cnf-new	2009-11-19 15:29:41.000000000 -0800
+@@ -49,7 +49,7 @@
+ log-slow-queries		= /db/mysql/log/slow_query.log
+ long_query_time			= 2000000
+ ft_min_word_len			= 3
+-
++log-queries-not-using-indexes   = TRUE
+ max_heap_table_size 		= 64M
+ tmp_table_size			= 64M

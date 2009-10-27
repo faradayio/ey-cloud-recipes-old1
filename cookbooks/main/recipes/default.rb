@@ -4,17 +4,21 @@ execute "testing" do
   }
 end
 
-# uncomment if you want to run couchdb recipe
-# require_recipe "couchdb"
+begin
+  require 'active_support'
+rescue LoadError
+  execute "installing activesupport" do
+    user 'root'
+    command 'gem install activesupport --no-rdoc --no-ri'
+  end
+  require 'active_support'
+end
+  
+execute "making /etc/chef/dna.json accessible" do
+  user 'root'
+  command 'chmod a+r /etc/chef/dna.json'
+end
 
-# uncomment to turn use the MBARI ruby patches for decreased memory usage and better thread/continuationi performance
-# require_recipe "mbari-ruby"
-
-# uncomment to turn on thinking sphinx 
-# require_recipe "thinking_sphinx"
-
-# uncomment to turn on ultrasphinx 
-# require_recipe "ultrasphinx"
-
-#uncomment to turn on memcached
-# require_recipe "memcached"
+IO.readlines('/etc/engine_yard_cloud_custom_recipes').map(&:strip).each do |name|
+  require_recipe name
+end if File.readable?('/etc/engine_yard_cloud_custom_recipes')

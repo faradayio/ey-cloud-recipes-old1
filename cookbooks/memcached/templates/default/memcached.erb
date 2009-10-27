@@ -13,12 +13,13 @@ MEMCACHED_RUNAS="memcached"
  
 #Specify maximum number of concurrent connections
 #1024 is default
-MAXCONN="1024"
+# sabshere 10/27/09 don't limit this
+MAXCONN="<%= @maxconn %>"
  
 #Listen for connections on what address?
 # If this is empty, memcached will listen on 0.0.0.0
 # be sure you have a firewall in place!
-LISTENON="0.0.0.0"
+LISTENON="<%= @listenon %>"
  
 #Listen for connections on what port?
 PORT="<%= @port %>"
@@ -29,4 +30,4 @@ PORT="<%= @port %>"
 PIDBASE="/var/run/memcached/memcached"
  
 #Other Options
-MISC_OPTS=""
+MISC_OPTS="<%= @misc_opts %>"
