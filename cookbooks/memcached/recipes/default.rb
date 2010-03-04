@@ -5,7 +5,7 @@
 
 if %w{app app_master solo}.include?(node[:instance_role])
 
-  MEMCACHED_SERVER_VERSION="1.4.4"
+  MEMCACHED_SERVER_VERSION="1.4.1"
   MEMCACHED_MONIT_GROUP="memcached"
 
   package "net-misc/memcached" do
