@@ -4,15 +4,20 @@ execute "testing" do
   }
 end
 
-begin
-  require 'active_support'
-rescue LoadError
-  execute "installing activesupport" do
-    user 'root'
-    command 'gem install activesupport --no-rdoc --no-ri'
-  end
-  require 'active_support'
-end
+# begin
+
+$:.unshift '/usr/lib/ruby/gems/1.8/gems/activesupport-2.3.5/lib'
+
+require 'active_support'
+
+
+# rescue LoadError
+#   execute "installing activesupport" do
+#     user 'root'
+#     command 'gem install activesupport --no-rdoc --no-ri'
+#   end
+#   require 'active_support'
+# end
   
 execute "making /etc/chef/dna.json accessible" do
   user 'root'
