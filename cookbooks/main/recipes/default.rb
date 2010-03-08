@@ -1,23 +1,9 @@
-execute "testing" do
-  command %Q{
-    echo "i ran at #{Time.now}" >> /root/cheftime
-  }
-end
-
-# begin
-
-$:.unshift '/usr/lib/ruby/gems/1.8/gems/activesupport-2.3.5/lib'
+# needs activesupport 2!
+active_support_path = [ '/usr/lib/ruby/gems/1.8/gems/activesupport-2.3.5/lib', '/usr/lib/ruby/gems/1.8/gems/activesupport-2.3.4/lib' ].detect { |active_support_path| File.readable? active_support_path }
+$:.unshift active_support_path
+$:.unshift File.join(active_support_path, 'activesupport')
 
 require 'active_support'
-
-
-# rescue LoadError
-#   execute "installing activesupport" do
-#     user 'root'
-#     command 'gem install activesupport --no-rdoc --no-ri'
-#   end
-#   require 'active_support'
-# end
   
 execute "making /etc/chef/dna.json accessible" do
   user 'root'
