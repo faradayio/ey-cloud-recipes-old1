@@ -3,7 +3,8 @@
 # Recipe:: default
 #
 
-if %w{app app_master solo}.include?(node[:instance_role])
+# disabled because now ey is running in vendored ruby... chef-deploy is not accessible
+if false and %w{app app_master solo}.include?(node[:instance_role])
 
   gem_lib_path = `gem which --quiet chef-deploy`
 
