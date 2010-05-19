@@ -9,7 +9,7 @@ if %w{app app_master solo}.include?(node[:instance_role])
     execute "run bundle install" do
       user 'root'
       cwd "/data/#{app_name}/current"
-      command 'sudo bundle install'
+      command 'bundle install'
     end
   end
 
