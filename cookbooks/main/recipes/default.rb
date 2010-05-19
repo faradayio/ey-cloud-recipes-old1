@@ -1,7 +1,7 @@
 # needs activesupport 2!
 active_support_path = [ '/usr/lib/ruby/gems/1.8/gems/activesupport-2.3.5/lib', '/usr/lib/ruby/gems/1.8/gems/activesupport-2.3.4/lib' ].detect { |active_support_path| File.readable? active_support_path }
 $:.unshift active_support_path
-$:.unshift File.join(active_support_path, 'activesupport')
+$:.unshift File.join(active_support_path, 'active_support')
 
 require 'active_support'
   
