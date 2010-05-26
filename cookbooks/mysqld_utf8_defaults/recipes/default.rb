@@ -5,13 +5,11 @@
 
 if %w{solo db_slave db_master}.include?(node[:instance_role])
 
-  node[:applications].each do |app_name, data|
-    template "/etc/mysql.d/utf8_defaults.cnf" do
-      owner 'root'
-      group 'root'
-      mode '0644'
-      source "utf8_defaults.cnf.erb"
-    end
+  remote_file "/etc/mysql.d/utf8_defaults.cnf" do
+    owner 'root'
+    group 'root'
+    mode '0644'
+    source "utf8_defaults.cnf"
   end
 
 end
