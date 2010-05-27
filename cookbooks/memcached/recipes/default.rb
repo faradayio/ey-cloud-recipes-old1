@@ -14,6 +14,7 @@ if %w{app app_master solo}.include?(node[:instance_role])
   end
 
   package "net-misc/memcached" do
+    action :upgrade
     version MEMCACHED_SERVER_VERSION
   end
 
@@ -27,12 +28,13 @@ if %w{app app_master solo}.include?(node[:instance_role])
       variables YAML.load(IO.read(memcached_config_path))
     end
   
-    # execute "ensure-running-memcached-version-is-correct" do
-    #   command %Q{
-    #     monit restart all -g #{MEMCACHED_MONIT_GROUP}
-    #   }
-    #   not_if "memcached-tool localhost stats | grep -E \"version[ ]+#{Regexp.escape MEMCACHED_SERVER_VERSION}\""
-    # end
+    execute "ensure-running-memcached-version-is-correct" do
+      user 'root'
+      command %Q{
+        monit restart all -g #{MEMCACHED_MONIT_GROUP}
+      }
+      not_if "memcached-tool localhost stats | grep -E \"version[ ]+#{Regexp.escape MEMCACHED_SERVER_VERSION}\""
+    end
   end
 
 end
