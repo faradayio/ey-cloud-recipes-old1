@@ -1,14 +1,6 @@
 #!/usr/bin/env ruby
 
 require 'fileutils'
-require 'rubygems'
-require 'active_support'
-require 'active_support/version'
-%w{
-  active_support/core_ext/object/blank
-}.each do |active_support_3_requirement|
-  require active_support_3_requirement
-end if ActiveSupport::VERSION::MAJOR == 3
 
 class StringReplacer
   NEWLINE = "AijQA6tD1wkWqgvLzXD"
@@ -21,8 +13,8 @@ class StringReplacer
   end
   
   def replace!(replacement, id, after_line)
-    id = 1 unless id.present?
-    after_line = nil unless after_line.present?
+    id = 1 unless id.to_s.strip.length > 0
+    after_line = nil unless after_line.to_s.strip.length > 0
     new_path = "#{path}.new"
     backup_path = "#{path}.bak"
     current_start_marker = START_MARKER % id.to_s
