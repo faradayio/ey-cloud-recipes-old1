@@ -15,6 +15,11 @@ if %w{app app_master solo}.include?(node[:instance_role])
   #   mode "0644"
   #   source 'http://static.brighterplanet.com/website/binaries/data_custom-binpkgs_32bit.tgz'
   # end
+  
+  execute "make sure there's a custom-binpkgs dir" do
+    user 'root'
+    command 'mkdir -p /data/custom-binpkgs'
+  end
 
   execute "get the binpkgs archive" do
     user 'root'
