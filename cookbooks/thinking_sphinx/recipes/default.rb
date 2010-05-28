@@ -31,14 +31,16 @@ if %w{app app_master solo}.include?(node[:instance_role])
       user node[:owner_name]
       group node[:owner_name]
       cwd "/data/#{app_name}/current"
-      command "rake thinking_sphinx:configure RAILS_ENV=production"
+      command "rake thinking_sphinx:configure RAILS_ENV=production; /bin/true"
+      # ignoring failure
     end
   
     execute "index sphinx" do
       user node[:owner_name]
       group node[:owner_name]
       cwd "/data/#{app_name}/current"
-      command "rake thinking_sphinx:index RAILS_ENV=production"
+      command "rake thinking_sphinx:index RAILS_ENV=production; /bin/true"
+      # ignoring failure
     end
   end
 

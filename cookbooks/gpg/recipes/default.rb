@@ -5,6 +5,8 @@
 
 if %w{app app_master solo}.include?(node[:instance_role])
 
-  package "app-crypt/gnupg"
+  package "app-crypt/gnupg" do
+    action :upgrade
+  end
 
 end
