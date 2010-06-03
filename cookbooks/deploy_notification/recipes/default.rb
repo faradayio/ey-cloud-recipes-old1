@@ -11,7 +11,7 @@ if %w{app_master solo}.include?(node[:instance_role]) and File.exists?('/etc/uni
     # Time.zone = IO.readlines("/data/#{app_name}/current/config/timezone").first.chomp
     # time = Time.zone.now
     deploy_notification_config = YAML.load(IO.read("/data/#{app_name}/current/deploy/deploy_notification.yml"))
-    commit = IO.readlines("/data/#{app_name}/current/REVISION").first.chomp
+    commit = File.readable?("/data/#{app_name}/current/REVISION") ? IO.readlines("/data/#{app_name}/current/REVISION").first.chomp : 'unknown'
     subject = "Deployed #{app_name} in #{universe} at #{commit}"
     email_path = "/data/#{app_name}/current/DEPLOY_NOTIFICATION"
     # email_path = "/data/#{app_name}/current/DEPLOY_NOTIFICATION.#{time.iso8601.gsub(/[^a-z0-9\-_]+/, '-')}"
